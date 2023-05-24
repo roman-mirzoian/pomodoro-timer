@@ -1,0 +1,9 @@
+.focusMainBackground {
+  background: rgba(255, 76, 76, 0.15);
+  border-radius: 24px;
+}
+
+.focusPlayBackground {
+  background: rgba(255, 76, 76, 0.71);
+  border-radius: 32px;
+}
