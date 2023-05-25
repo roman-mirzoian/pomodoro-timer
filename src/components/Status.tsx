@@ -7,8 +7,8 @@ const Status: FunctionComponent<StatusProps> = () => {
   return (
     <div>
       <StatusBar status={StatusState.FOCUS} />
-      <StatusBar status={StatusState.SHORT_BREAK} />
-      <StatusBar status={StatusState.LONG_BREAK} />
+      {/* <StatusBar status={StatusState.SHORT_BREAK} /> */}
+      {/* <StatusBar status={StatusState.LONG_BREAK} /> */}
     </div>
   );
 };

@@ -3,3 +3,7 @@ export const ITEM_COLORS = {
   shortBreak: "#14401D",
   longBreak: "#153047",
 };
+
+export const appBackground = {
+  focus: "#FFF2F2",
+};
