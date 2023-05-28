@@ -12,6 +12,7 @@ const mainStyle =
 
 interface PomodoroProps {}
 
+// @renderOn
 const Pomodoro: FunctionComponent<PomodoroProps> = () => {
   const state = "focus";
   let appBackgroundStyle;
@@ -28,5 +29,6 @@ const Pomodoro: FunctionComponent<PomodoroProps> = () => {
     </div>
   );
 };
+// @renderOff
 
 export default Pomodoro;

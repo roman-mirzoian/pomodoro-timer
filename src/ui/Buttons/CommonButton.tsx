@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { ButtonName, StatusState } from "../../types/types";
+import { AppState, ButtonName, StatusState } from "../../types/types";
 import styles from "./CommonButton.module.css";
 import { ITEM_COLORS } from "../../constants";
 
@@ -10,17 +10,22 @@ const mainBtnStyle = "w-[80px] h-[80px] flex justify-center items-center";
 
 // @typesOn
 interface CommonButtonProps {
+  appState?: AppState;
   state: StatusState.FOCUS;
   buttonName: ButtonName;
+  onClick?: () => void;
 }
 // @typesOff
 
 // @renderOn
 const CommonButton: FunctionComponent<CommonButtonProps> = ({
+  appState,
   state,
   buttonName,
+  onClick,
 }) => {
   let buttonColor, btnStyle, buttonComponent;
+  console.log(appState);
 
   switch (state) {
     case StatusState.FOCUS:
@@ -30,7 +35,12 @@ const CommonButton: FunctionComponent<CommonButtonProps> = ({
   }
   switch (buttonName) {
     case ButtonName.PLAY:
-      buttonComponent = <PlayButtonView color={buttonColor} />;
+      buttonComponent =
+        appState === AppState.PLAY ? (
+          <PauseButtonView color={buttonColor} />
+        ) : (
+          <PlayButtonView color={buttonColor} />
+        );
       btnStyle = `${styles.focusPlayBackground} ${playBtnStyle}`;
       break;
     case ButtonName.NEXT:
@@ -45,7 +55,7 @@ const CommonButton: FunctionComponent<CommonButtonProps> = ({
 
   return (
     <div className={btnStyle}>
-      <button>{buttonComponent}</button>
+      <button onClick={onClick}>{buttonComponent}</button>
     </div>
   );
 };
@@ -62,6 +72,23 @@ function PlayButtonView({ color }: { color: string }) {
     >
       <path
         d="M22 13C21.9992 13.3439 21.9104 13.6818 21.7419 13.9816C21.5734 14.2814 21.3309 14.533 21.0375 14.7125L3.03749 25.7C2.73766 25.89 2.3914 25.9939 2.0365 26.0006C1.68159 26.0072 1.33169 25.9162 1.02499 25.7375C0.713758 25.5667 0.454302 25.3152 0.273924 25.0095C0.093547 24.7037 -0.00108208 24.355 -6.18584e-06 24V1.99996C-0.00108208 1.64496 0.093547 1.29623 0.273924 0.990471C0.454302 0.684709 0.713758 0.433218 1.02499 0.26246C1.33169 0.0837584 1.68159 -0.00725329 2.0365 -0.000640198C2.3914 0.00597289 2.73766 0.109956 3.03749 0.29996L21.0375 11.2875C21.3309 11.4669 21.5734 11.7185 21.7419 12.0183C21.9104 12.3181 21.9992 12.6561 22 13Z"
+        fill={color}
+      />
+    </svg>
+  );
+}
+
+function PauseButtonView({ color }: { color: string }) {
+  return (
+    <svg
+      width="22"
+      height="24"
+      viewBox="0 0 22 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M22 2V22C22 22.5304 21.7893 23.0391 21.4142 23.4142C21.0391 23.7893 20.5304 24 20 24H15.5C14.9696 24 14.4609 23.7893 14.0858 23.4142C13.7107 23.0391 13.5 22.5304 13.5 22V2C13.5 1.46957 13.7107 0.960859 14.0858 0.585786C14.4609 0.210714 14.9696 0 15.5 0H20C20.5304 0 21.0391 0.210714 21.4142 0.585786C21.7893 0.960859 22 1.46957 22 2ZM6.5 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V22C0 22.5304 0.210714 23.0391 0.585786 23.4142C0.960859 23.7893 1.46957 24 2 24H6.5C7.03043 24 7.53914 23.7893 7.91421 23.4142C8.28929 23.0391 8.5 22.5304 8.5 22V2C8.5 1.46957 8.28929 0.960859 7.91421 0.585786C7.53914 0.210714 7.03043 0 6.5 0Z"
         fill={color}
       />
     </svg>

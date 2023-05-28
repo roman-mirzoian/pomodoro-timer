@@ -1,3 +1,9 @@
+export enum AppState {
+  STOP = "STOP",
+  PLAY = "PLAY",
+  PAUSE = "PAUSE",
+}
+
 export enum StatusState {
   FOCUS = "FOCUS",
   SHORT_BREAK = "SHORT_BREAK",
