@@ -1,3 +1,16 @@
+export interface TimerState {
+  appState: AppState;
+  appStatus: AppStatus;
+  isShortBreakCompleted: boolean;
+  settings: {
+    darkMode: boolean;
+    focusLength: number;
+    shortBreakLength: number;
+    longBreakLength: number;
+    notifications: boolean;
+  };
+}
+
 export enum AppState {
   STOP = "STOP",
   PLAY = "PLAY",

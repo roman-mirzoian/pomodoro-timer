@@ -1,9 +1,10 @@
-import { FunctionComponent } from "react";
+import { FC } from "react";
 import Status from "./Status";
 import Timer from "./Times";
 import ControlButtons from "./ControlButtons";
 import "../index.css";
-import { appBackground } from "../constants";
+import { useAppSelector } from "../hooks/redux";
+import { AppStatus } from "../types/types";
 
 // @cssOn
 const mainStyle =
@@ -13,14 +14,22 @@ const mainStyle =
 interface PomodoroProps {}
 
 // @renderOn
-const Pomodoro: FunctionComponent<PomodoroProps> = () => {
-  const state = "focus";
+const Pomodoro: FC<PomodoroProps> = () => {
+  const { appStatus } = useAppSelector((state) => state.timerReducer);
+
   let appBackgroundStyle;
-  switch (state) {
-    case "focus":
-      appBackgroundStyle = `${mainStyle} ${appBackground}`;
+  switch (appStatus) {
+    case AppStatus.FOCUS:
+      appBackgroundStyle = `${mainStyle} bg-focusBg`;
+      break;
+    case AppStatus.SHORT_BREAK:
+      appBackgroundStyle = `${mainStyle} bg-shortBreakBg`;
+      break;
+    case AppStatus.LONG_BREAK:
+      appBackgroundStyle = `${mainStyle} bg-longBreakBg`;
       break;
   }
+
   return (
     <div className={appBackgroundStyle}>
       <Status />

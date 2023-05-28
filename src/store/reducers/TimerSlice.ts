@@ -1,21 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { AppState, AppStatus } from "../../types/types";
-
-interface TimerState {
-  appState: AppState;
-  status: AppStatus;
-  settings: {
-    darkMode: boolean;
-    focusLength: number;
-    shortBreakLength: number;
-    longBreakLength: number;
-    notifications: boolean;
-  };
-}
+import { AppState, AppStatus, TimerState } from "../../types/types";
 
 const initialState: TimerState = {
   appState: AppState.STOP,
-  status: AppStatus.FOCUS,
+  appStatus: AppStatus.FOCUS,
+  isShortBreakCompleted: false,
   settings: {
     darkMode: false,
     focusLength: 25,
@@ -29,17 +18,22 @@ export const timerSlice = createSlice({
   name: "timer",
   initialState,
   reducers: {
-    changeAppState(state, action: PayloadAction<string>) {
-      switch (action.payload) {
-        case AppState.PAUSE:
-          state.appState = AppState.PAUSE;
-          break;
-        case AppState.PLAY:
-          state.appState = AppState.PLAY;
-          break;
-        case AppState.STOP:
-          state.appState = AppState.STOP;
-          break;
+    changeAppState(state, action: PayloadAction<AppState>) {
+      state.appState = action.payload;
+    },
+    changeAppStatus(state, action: PayloadAction<AppStatus>) {
+      state.appStatus = action.payload;
+      if (
+        !state.isShortBreakCompleted &&
+        action.payload === AppStatus.SHORT_BREAK
+      ) {
+        state.isShortBreakCompleted = true;
+      }
+      if (
+        state.isShortBreakCompleted &&
+        action.payload === AppStatus.LONG_BREAK
+      ) {
+        state.isShortBreakCompleted = false;
       }
     },
   },
