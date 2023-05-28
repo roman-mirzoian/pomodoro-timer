@@ -1,14 +1,15 @@
 import { FunctionComponent } from "react";
-import StatusBar, { StatusState } from "../ui/StatusBar/StatusBar";
+import StatusBar from "../ui/StatusBar/StatusBar";
+import { AppStatus } from "../types/types";
 
 interface StatusProps {}
 
 const Status: FunctionComponent<StatusProps> = () => {
   return (
     <div>
-      <StatusBar status={StatusState.FOCUS} />
-      {/* <StatusBar status={StatusState.SHORT_BREAK} /> */}
-      {/* <StatusBar status={StatusState.LONG_BREAK} /> */}
+      <StatusBar status={AppStatus.FOCUS} />
+      {/* <StatusBar status={AppStatus.SHORT_BREAK} /> */}
+      {/* <StatusBar status={AppStatus.LONG_BREAK} /> */}
     </div>
   );
 };

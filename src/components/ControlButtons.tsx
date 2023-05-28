@@ -1,11 +1,12 @@
 import { FunctionComponent } from "react";
-import { AppState, ButtonName, StatusState } from "../types/types";
+import { AppState, ButtonName, AppStatus } from "../types/types";
 import CommonButton from "../ui/Buttons/CommonButton";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { timerSlice } from "../store/reducers/TimerSlice";
 
 interface ControlButtonsProps {}
 
+// @renderOn
 const ControlButtons: FunctionComponent<ControlButtonsProps> = () => {
   const { appState } = useAppSelector((state) => state.timerReducer);
   const { changeAppState } = timerSlice.actions;
@@ -20,21 +21,26 @@ const ControlButtons: FunctionComponent<ControlButtonsProps> = () => {
     }
   }
 
+  function handleNextButtonClick() {
+
+  }
+
   return (
     <div className="flex items-center gap-x-4">
       <CommonButton
-        state={StatusState.FOCUS}
+        state={AppStatus.FOCUS}
         buttonName={ButtonName.SETTINGS}
       />
       <CommonButton
         appState={appState}
-        state={StatusState.FOCUS}
+        state={AppStatus.FOCUS}
         buttonName={ButtonName.PLAY}
         onClick={handlePlayButtonClick}
       />
-      <CommonButton state={StatusState.FOCUS} buttonName={ButtonName.NEXT} />
+      <CommonButton state={AppStatus.FOCUS} buttonName={ButtonName.NEXT} />
     </div>
   );
 };
+// @renderOff
 
 export default ControlButtons;

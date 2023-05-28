@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { AppState, StatusState } from "../../types/types";
+import { AppState, AppStatus } from "../../types/types";
 
 interface TimerState {
   appState: AppState;
-  status: StatusState;
+  status: AppStatus;
   settings: {
     darkMode: boolean;
     focusLength: number;
@@ -15,7 +15,7 @@ interface TimerState {
 
 const initialState: TimerState = {
   appState: AppState.STOP,
-  status: StatusState.FOCUS,
+  status: AppStatus.FOCUS,
   settings: {
     darkMode: false,
     focusLength: 25,

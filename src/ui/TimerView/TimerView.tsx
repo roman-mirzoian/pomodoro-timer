@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { StatusState } from "../../types/types";
+import { AppStatus } from "../../types/types";
 import styles from "./TimerView.module.css";
 
 // @cssOn
@@ -21,7 +21,7 @@ const TimerView: FunctionComponent<TimerViewProps> = ({ state, time }) => {
   const { minutes, seconds } = time;
   let numberColor;
   switch (state) {
-    case StatusState.FOCUS:
+    case AppStatus.FOCUS:
       numberColor = "text-focusItem";
       break;
   }

@@ -3,6 +3,7 @@ import brain from "../../assets/svg/brain.svg";
 import shortCoffee from "../../assets/svg/short-coffee.svg";
 import longCoffee from "../../assets/svg/long-coffee.svg";
 import styles from "./StatusBar.module.css";
+import { AppStatus } from "../../types/types";
 
 // @cssOn
 const baseLabelStyle =
@@ -13,14 +14,8 @@ const longBreakStyles = `${baseLabelStyle} bg-longBreakBg w-[190px]  border-long
 // @cssOff
 
 // @typesOn
-export enum StatusState {
-  FOCUS = "FOCUS",
-  SHORT_BREAK = "SHORT_BREAK",
-  LONG_BREAK = "LONG_BREAK",
-}
-
 interface StatusBarProps {
-  status: StatusState;
+  status: AppStatus;
 }
 // @typesOff
 
@@ -28,17 +23,17 @@ interface StatusBarProps {
 const StatusBar: FC<StatusBarProps> = ({ status }) => {
   let statusText, statusIcon, labelStyles;
   switch (status) {
-    case StatusState.FOCUS:
+    case AppStatus.FOCUS:
       statusText = "Focus";
       statusIcon = <img src={brain} alt="focus" />;
       labelStyles = focusLabelStyles;
       break;
-    case StatusState.SHORT_BREAK:
+    case AppStatus.SHORT_BREAK:
       statusText = "Short Break";
       statusIcon = <img src={shortCoffee} alt="short break" />;
       labelStyles = shortBreakLabelStyles;
       break;
-    case StatusState.LONG_BREAK:
+    case AppStatus.LONG_BREAK:
       statusText = "Long Break";
       statusIcon = <img src={longCoffee} alt="long break" />;
       labelStyles = longBreakStyles;

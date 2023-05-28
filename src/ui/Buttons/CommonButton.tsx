@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { AppState, ButtonName, StatusState } from "../../types/types";
+import { AppState, ButtonName, AppStatus } from "../../types/types";
 import styles from "./CommonButton.module.css";
 import { ITEM_COLORS } from "../../constants";
 
@@ -11,7 +11,7 @@ const mainBtnStyle = "w-[80px] h-[80px] flex justify-center items-center";
 // @typesOn
 interface CommonButtonProps {
   appState?: AppState;
-  state: StatusState.FOCUS;
+  state: AppStatus.FOCUS;
   buttonName: ButtonName;
   onClick?: () => void;
 }
@@ -28,7 +28,7 @@ const CommonButton: FunctionComponent<CommonButtonProps> = ({
   console.log(appState);
 
   switch (state) {
-    case StatusState.FOCUS:
+    case AppStatus.FOCUS:
       buttonColor = ITEM_COLORS.focus;
       btnStyle = styles.focusBackground;
       break;
@@ -54,9 +54,9 @@ const CommonButton: FunctionComponent<CommonButtonProps> = ({
   }
 
   return (
-    <div className={btnStyle}>
-      <button onClick={onClick}>{buttonComponent}</button>
-    </div>
+    <button className={btnStyle} onClick={onClick}>
+      {buttonComponent}
+    </button>
   );
 };
 // renderOff
