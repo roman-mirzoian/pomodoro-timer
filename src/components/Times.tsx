@@ -1,13 +1,13 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import TimerView from "../ui/TimerView/TimerView";
-import { AppState, AppStatus } from "../types/types";
+import { AppState } from "../types/types";
 import { useAppSelector } from "../hooks/redux";
 
 interface TimerProps {}
 
 // @renderOn
 const Timer: FunctionComponent<TimerProps> = () => {
-  const { appState, settings } = useAppSelector((state) => state.timerReducer);
+  const { appState, appStatus } = useAppSelector((state) => state.timerReducer);
 
   const startingMinutes = 25;
   const [currentTime, setCurrentTime] = useState({
@@ -44,7 +44,7 @@ const Timer: FunctionComponent<TimerProps> = () => {
     };
   }, [appState]);
 
-  return <TimerView state={AppStatus.FOCUS} time={currentTime} />;
+  return <TimerView status={appStatus} time={currentTime} />;
 };
 // @renderOff
 

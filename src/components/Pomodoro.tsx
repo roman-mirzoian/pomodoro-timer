@@ -1,10 +1,10 @@
 import { FC } from "react";
-import Status from "./Status";
 import Timer from "./Times";
 import ControlButtons from "./ControlButtons";
 import "../index.css";
 import { useAppSelector } from "../hooks/redux";
 import { AppStatus } from "../types/types";
+import StatusBar from "../ui/StatusBar/StatusBar";
 
 // @cssOn
 const mainStyle =
@@ -32,7 +32,7 @@ const Pomodoro: FC<PomodoroProps> = () => {
 
   return (
     <div className={appBackgroundStyle}>
-      <Status />
+      <StatusBar status={appStatus} />
       <Timer />
       <ControlButtons />
     </div>

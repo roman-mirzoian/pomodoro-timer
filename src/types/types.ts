@@ -28,3 +28,9 @@ export enum ButtonName {
   NEXT = "NEXT",
   SETTINGS = "SETTINGS",
 }
+
+export enum AppColors {
+  FOCUS = "#471515",
+  SHORT_BREAK = "#14401D",
+  LONG_BREAK = "#153047",
+}

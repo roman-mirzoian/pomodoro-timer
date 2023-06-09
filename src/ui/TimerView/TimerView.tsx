@@ -8,7 +8,7 @@ const mainStyle = "flex flex-col items-center justify-center";
 
 // @typesOn
 interface TimerViewProps {
-  state: string;
+  status: AppStatus;
   time: {
     minutes: number;
     seconds: number;
@@ -17,12 +17,18 @@ interface TimerViewProps {
 // @typesOff
 
 // @renderOn
-const TimerView: FunctionComponent<TimerViewProps> = ({ state, time }) => {
+const TimerView: FunctionComponent<TimerViewProps> = ({ status, time }) => {
   const { minutes, seconds } = time;
   let numberColor;
-  switch (state) {
+  switch (status) {
     case AppStatus.FOCUS:
       numberColor = "text-focusItem";
+      break;
+    case AppStatus.SHORT_BREAK:
+      numberColor = "text-shortBreakItem";
+      break;
+    case AppStatus.LONG_BREAK:
+      numberColor = "text-longBreakItem";
       break;
   }
 

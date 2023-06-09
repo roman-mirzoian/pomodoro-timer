@@ -1,9 +1,7 @@
 import { FC } from "react";
-import brain from "../../assets/svg/brain.svg";
-import shortCoffee from "../../assets/svg/short-coffee.svg";
-import longCoffee from "../../assets/svg/long-coffee.svg";
 import styles from "./StatusBar.module.css";
-import { AppStatus } from "../../types/types";
+import { AppColors, AppStatus } from "../../types/types";
+import { Brain, Cup } from "./StatusView";
 
 // @cssOn
 const baseLabelStyle =
@@ -25,17 +23,17 @@ const StatusBar: FC<StatusBarProps> = ({ status }) => {
   switch (status) {
     case AppStatus.FOCUS:
       statusText = "Focus";
-      statusIcon = <img src={brain} alt="focus" />;
+      statusIcon = <Brain color={AppColors.FOCUS} />;
       labelStyles = focusLabelStyles;
       break;
     case AppStatus.SHORT_BREAK:
       statusText = "Short Break";
-      statusIcon = <img src={shortCoffee} alt="short break" />;
+      statusIcon = <Cup color={AppColors.SHORT_BREAK} />;
       labelStyles = shortBreakLabelStyles;
       break;
     case AppStatus.LONG_BREAK:
       statusText = "Long Break";
-      statusIcon = <img src={longCoffee} alt="long break" />;
+      statusIcon = <Cup color={AppColors.LONG_BREAK} />;
       labelStyles = longBreakStyles;
       break;
   }
