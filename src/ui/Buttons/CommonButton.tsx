@@ -42,7 +42,6 @@ const CommonButton: FC<CommonButtonProps> = ({
     buttonColor,
     backgroundColor,
   });
-  console.log(componentStyle);
 
   return (
     <button className={componentStyle} onClick={onClick}>

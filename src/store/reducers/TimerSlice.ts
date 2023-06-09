@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { AppState, AppStatus, TimerState } from "../../types/types";
 
 const initialState: TimerState = {
@@ -7,9 +7,9 @@ const initialState: TimerState = {
   isShortBreakCompleted: false,
   settings: {
     darkMode: false,
-    focusLength: 25,
-    shortBreakLength: 25,
-    longBreakLength: 25,
+    focusLength: 1,
+    shortBreakLength: 2,
+    longBreakLength: 3,
     notifications: false,
   },
 };
@@ -18,22 +18,39 @@ export const timerSlice = createSlice({
   name: "timer",
   initialState,
   reducers: {
-    changeAppState(state, action: PayloadAction<AppState>) {
-      state.appState = action.payload;
+    changeAppState(state) {
+      let appState;
+      if (state.appState === AppState.PLAY) {
+        appState = AppState.PAUSE;
+      } else {
+        appState = AppState.PLAY;
+      }
+      if (appState) {
+        state.appState = appState;
+      }
     },
-    changeAppStatus(state, action: PayloadAction<AppStatus>) {
-      state.appStatus = action.payload;
-      if (
-        !state.isShortBreakCompleted &&
-        action.payload === AppStatus.SHORT_BREAK
-      ) {
-        state.isShortBreakCompleted = true;
+    setNextAppStatus(state) {
+      let appStatus, isShortBreakCompleted;
+      if (state.appStatus === AppStatus.FOCUS && !state.isShortBreakCompleted) {
+        appStatus = AppStatus.SHORT_BREAK;
+        isShortBreakCompleted = true;
+      }
+      if (state.appStatus === AppStatus.FOCUS && state.isShortBreakCompleted) {
+        appStatus = AppStatus.LONG_BREAK;
+        isShortBreakCompleted = false;
       }
       if (
-        state.isShortBreakCompleted &&
-        action.payload === AppStatus.LONG_BREAK
+        state.appStatus === AppStatus.SHORT_BREAK ||
+        state.appStatus === AppStatus.LONG_BREAK
       ) {
-        state.isShortBreakCompleted = false;
+        appStatus = AppStatus.FOCUS;
+      }
+
+      if (appStatus) {
+        state.appStatus = appStatus;
+      }
+      if (isShortBreakCompleted !== undefined) {
+        state.isShortBreakCompleted = isShortBreakCompleted;
       }
     },
   },

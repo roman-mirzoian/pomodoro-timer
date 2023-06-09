@@ -11,10 +11,8 @@ const mainStyle =
   "w-full h-full flex flex-col gap-8 justify-center items-center";
 // @cssOff
 
-interface PomodoroProps {}
-
 // @renderOn
-const Pomodoro: FC<PomodoroProps> = () => {
+const Pomodoro: FC = () => {
   const { appStatus } = useAppSelector((state) => state.timerReducer);
 
   let appBackgroundStyle;
