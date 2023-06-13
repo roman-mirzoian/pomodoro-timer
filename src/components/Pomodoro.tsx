@@ -1,10 +1,12 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Timer from "./Times";
 import ControlButtons from "./ControlButtons";
 import "../index.css";
-import { useAppSelector } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { AppStatus } from "../types/types";
 import StatusBar from "../ui/StatusBar/StatusBar";
+import SettingsView from "../ui/Modals/Settings/Settings";
+import { timerSlice } from "../store/reducers/TimerSlice";
 
 // @cssOn
 const mainStyle =
@@ -13,7 +15,10 @@ const mainStyle =
 
 // @renderOn
 const Pomodoro: FC = () => {
-  const { appStatus } = useAppSelector((state) => state.timerReducer);
+  const { appStatus, appState } = useAppSelector((state) => state.timerReducer);
+  const dispatch = useAppDispatch();
+  const { stopTimer } = timerSlice.actions;
+  const [showSettings, setShowSettings] = useState<boolean>(false);
 
   let appBackgroundStyle;
   switch (appStatus) {
@@ -28,11 +33,20 @@ const Pomodoro: FC = () => {
       break;
   }
 
+  function handleOpenSettings() {
+    setShowSettings((prevViewState) => !prevViewState);
+    dispatch(stopTimer());
+  }
+  function handleCloseSettings() {
+    setShowSettings(false);
+  }
+
   return (
     <div className={appBackgroundStyle}>
       <StatusBar status={appStatus} />
       <Timer />
-      <ControlButtons />
+      <ControlButtons handleOpenSettings={handleOpenSettings} />
+      {showSettings && <SettingsView onClose={handleCloseSettings} />}
     </div>
   );
 };

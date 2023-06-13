@@ -4,8 +4,12 @@ import CommonButton from "../ui/Buttons/CommonButton";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { timerSlice } from "../store/reducers/TimerSlice";
 
+interface ControlButtonsProps {
+  handleOpenSettings: () => void;
+}
+
 // @renderOn
-const ControlButtons: FC = () => {
+const ControlButtons: FC<ControlButtonsProps> = ({ handleOpenSettings }) => {
   const { appState, appStatus } = useAppSelector((state) => state.timerReducer);
   const { changeAppState, setNextAppStatus } = timerSlice.actions;
   const dispatch = useAppDispatch();
@@ -18,14 +22,12 @@ const ControlButtons: FC = () => {
     dispatch(setNextAppStatus());
   }
 
-  function handleSettingButtonClick() {}
-
   return (
     <div className="flex items-center gap-x-4">
       <CommonButton
         appStatus={appStatus}
         buttonName={ButtonName.SETTINGS}
-        onClick={handleSettingButtonClick}
+        onClick={handleOpenSettings}
       />
       <CommonButton
         appState={appState}

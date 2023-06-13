@@ -11,6 +11,8 @@ const Timer: FunctionComponent<TimerProps> = () => {
   const { appState, appStatus, settings } = useAppSelector(
     (state) => state.timerReducer
   );
+  console.log(settings);
+
   const { setNextAppStatus } = timerSlice.actions;
   const dispatch = useAppDispatch();
 
@@ -26,7 +28,7 @@ const Timer: FunctionComponent<TimerProps> = () => {
       seconds: 0,
     });
     setTimeInSeconds(starterTime * 60);
-  }, [appStatus]);
+  }, [appStatus, settings]);
 
   const [timerId, setTimerId] = useState<NodeJS.Timer>();
 

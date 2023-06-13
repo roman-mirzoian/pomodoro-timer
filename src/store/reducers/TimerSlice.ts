@@ -29,6 +29,9 @@ export const timerSlice = createSlice({
         state.appState = appState;
       }
     },
+    stopTimer(state) {
+      state.appState = AppState.PAUSE;
+    },
     setNextAppStatus(state) {
       let appStatus, isShortBreakCompleted;
       if (state.appStatus === AppStatus.FOCUS && !state.isShortBreakCompleted) {
@@ -52,6 +55,21 @@ export const timerSlice = createSlice({
       if (isShortBreakCompleted !== undefined) {
         state.isShortBreakCompleted = isShortBreakCompleted;
       }
+    },
+    setDarkMode(state) {
+      state.settings.darkMode = !state.settings.darkMode;
+    },
+    setNotifications(state) {
+      state.settings.notifications = !state.settings.notifications;
+    },
+    setFocusLength(state, action) {
+      state.settings.focusLength = action.payload;
+    },
+    setShortBreakLength(state, action) {
+      state.settings.shortBreakLength = action.payload;
+    },
+    setLongBreakLength(state, action) {
+      state.settings.longBreakLength = action.payload;
     },
   },
 });
